@@ -29,9 +29,21 @@ describe("Temp describe", () => {
     })
 
     it("it has a default message", async () => {
-        const message = await inbox.methods.message().call()
+        const message = await inbox.methods.message().call();
         console.log(message, "is it visible")
-        assert.equal(message, "Anj baby");
         
     })
+
+    it("Setting a message", async () => {
+        await inbox.methods.setMessage("Anj thango").send({
+            from: accounts[0], 
+            gas: "100000"
+        });
+
+        const message = await inbox.methods.message().call();
+        assert.equal(message, "Anj thango");
+    })
+
+
+
 })
